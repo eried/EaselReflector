@@ -231,7 +231,7 @@ namespace EaselReflector
         }
 
         /// <summary>
-        /// Ciclically looks for a free filename in an specified folder
+        /// Cyclically looks for a free filename in an specified folder
         /// </summary>
         /// <param name="destinationFolder">Destination folder for the file</param>
         /// <param name="originalName">Source name</param>
