@@ -10,6 +10,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using EaselReflector.Properties;
 
 namespace EaselReflector
 {
@@ -19,7 +20,7 @@ namespace EaselReflector
         {
             InitializeComponent();
 
-            webBrowserMain.Navigate("http://easel.inventables.com/users/sign_in");
+            webBrowserMain.Navigate(Resources.UrlHome + "/users/sign_in");
             DialogResult = DialogResult.Cancel;
         }
 
@@ -28,7 +29,7 @@ namespace EaselReflector
             UseWaitCursor = false;
 
             var url = e.Url.AbsoluteUri;
-            if (url.Contains("easel.inventables") && !url.Contains("sign_in"))
+            if (url.Contains(Resources.UrlHome) && !url.Contains("sign_in"))
             {
                 DialogResult = DialogResult.OK;
                 Close();
