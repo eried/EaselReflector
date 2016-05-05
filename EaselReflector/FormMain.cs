@@ -1,30 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using EaselReflector.Properties;
 using FolderSelect;
+using Shell32;
 
 namespace EaselReflector
 {
     public partial class FormMain : Form
     {
-        private readonly FolderSelectDialog _folder = new FolderSelectDialog { Title = "Directory for syncing projects"};
-        private List<ProjectLink> _projects = new List<ProjectLink>();
+        private readonly FolderSelectDialog _folder = new FolderSelectDialog {Title = "Directory for syncing projects"};
         private int _lastPage = 1;
+        private readonly List<ProjectLink> _projects = new List<ProjectLink>();
+
         public FormMain()
         {
             InitializeComponent();
 
-            if(Directory.Exists(Settings.Default.LastFolder))
+            if (Directory.Exists(Settings.Default.LastFolder))
                 _folder.FileName = Settings.Default.LastFolder;
 
             UpdateGui();
@@ -59,7 +57,7 @@ namespace EaselReflector
                 // Sync projects
                 backgroundWorkerDownload.RunWorkerAsync();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("Unable to sync your projects.\n\n" + ex.Message, "Error", MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
@@ -68,7 +66,7 @@ namespace EaselReflector
             }
         }
 
-        private void UpdateGui(bool isEnabled=true)
+        private void UpdateGui(bool isEnabled = true)
         {
             groupBoxOptions.Enabled = isEnabled;
             buttonClose.Enabled = isEnabled;
@@ -103,10 +101,10 @@ namespace EaselReflector
                     var r = new StreamReader(response.GetResponseStream()).ReadToEnd();
 
                     // Parse projects
-                    foreach (Match p in Regex.Matches(r,Resources.RegexProjects,
-                                RegexOptions.Singleline))
-                        backgroundWorkerDownload.ReportProgress(-1,new Tuple<string, string>(p.Groups["url"].Value,
-                                p.Groups["name"].Value.Replace("\n", "").Replace("\r", "").Trim()));
+                    foreach (Match p in Regex.Matches(r, Resources.RegexProjects,
+                        RegexOptions.Singleline))
+                        backgroundWorkerDownload.ReportProgress(-1, new Tuple<string, string>(p.Groups["url"].Value,
+                            p.Groups["name"].Value.Replace("\n", "").Replace("\r", "").Trim()));
 
                     if (r.Contains("class=\"next_page\""))
                     {
@@ -114,9 +112,7 @@ namespace EaselReflector
                         nextPage = true;
                         e.Result = 1;
                     }
-
                 }
-
             } while (nextPage);
         }
 
@@ -124,11 +120,14 @@ namespace EaselReflector
         {
             _projects.Clear();
 
-            foreach (var lnkPath in Directory.EnumerateFiles(_folder.FileName, "*"+Resources.LinkExtension, SearchOption.AllDirectories))
+            foreach (
+                var lnkPath in
+                    Directory.EnumerateFiles(_folder.FileName, "*" + Resources.LinkExtension,
+                        SearchOption.AllDirectories))
             {
-                var dir = new Shell32.Shell().NameSpace(Path.GetDirectoryName(lnkPath));
+                var dir = new Shell().NameSpace(Path.GetDirectoryName(lnkPath));
                 var itm = dir.Items().Item(Path.GetFileName(lnkPath));
-                var lnk = (Shell32.ShellLinkObject)itm.GetLink;
+                var lnk = (ShellLinkObject) itm.GetLink;
                 _projects.Add(new ProjectLink {Url = lnk.Target.Path, Path = lnkPath, Name = lnk.Description});
             }
         }
@@ -184,8 +183,10 @@ namespace EaselReflector
             if (e.ProgressPercentage == -1)
             {
                 // Increment the progress bar
-                progressBarMain.Value += progressBarMain.Value < 50 ? 10 : (progressBarMain.Value < 75 ? 5 : (progressBarMain.Value < 95 ? 1 : 0));
-                
+                progressBarMain.Value += progressBarMain.Value < 50
+                    ? 10
+                    : (progressBarMain.Value < 75 ? 5 : (progressBarMain.Value < 95 ? 1 : 0));
+
                 // Create shortcut
                 var p = e.UserState as Tuple<string, string>;
                 var urlDestination = Resources.UrlHome + "/" + p.Item1;
@@ -194,7 +195,7 @@ namespace EaselReflector
                 foreach (var project in _projects.Where(project => project.Url == urlDestination))
                 {
                     found = true;
-                        
+
                     // Update the filename only, only if needed
                     if (Path.GetFileNameWithoutExtension(project.Path) == p.Item2) continue;
 
@@ -212,15 +213,16 @@ namespace EaselReflector
                     File.WriteAllText(lnkPath, string.Empty);
 
                     // Initialize a ShellLinkObject for that .lnk file
-                    var shl = new Shell32.Shell();
+                    var shl = new Shell();
                     var dir = shl.NameSpace(Path.GetDirectoryName(lnkPath));
                     var itm = dir.Items().Item(lnkName);
-                    var lnk = (Shell32.ShellLinkObject)itm.GetLink;
+                    var lnk = (ShellLinkObject) itm.GetLink;
                     lnk.Path = urlDestination;
-                    lnk.Description = "Original project name: "+ p.Item2;
+                    lnk.Description = "Original project name: " + p.Item2;
 
                     // And dummy an icon (it will use notepad's)
-                    lnk.SetIconLocation(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.System),"imageres.dll"), 66);
+                    lnk.SetIconLocation(
+                        Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.System), "imageres.dll"), 66);
 
                     // Done, save it
                     lnk.Save(lnkPath);
@@ -231,7 +233,7 @@ namespace EaselReflector
         }
 
         /// <summary>
-        /// Cyclically looks for a free filename in an specified folder
+        ///     Cyclically looks for a free filename in an specified folder
         /// </summary>
         /// <param name="destinationFolder">Destination folder for the file</param>
         /// <param name="originalName">Source name</param>
@@ -247,13 +249,13 @@ namespace EaselReflector
                 finalName = originalName + (n++ > 0 ? $" ({n})" : "") + Resources.LinkExtension;
                 finalPath = Path.Combine(destinationFolder, finalName);
             } while (File.Exists(finalPath));
-            
+
             return finalPath;
         }
     }
 
     /// <summary>
-    /// Represents the data in a project link
+    ///     Represents the data in a project link
     /// </summary>
     internal struct ProjectLink
     {

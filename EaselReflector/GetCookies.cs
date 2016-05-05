@@ -3,21 +3,21 @@ using System.Net;
 using System.Runtime.InteropServices;
 using System.Text;
 
-static internal class GetCookies
+internal static class GetCookies
 {
+    private const int InternetCookieHttponly = 0x2000;
+
     [DllImport("wininet.dll", SetLastError = true)]
     public static extern bool InternetGetCookieEx(
         string url,
         string cookieName,
         StringBuilder cookieData,
         ref int size,
-        Int32 dwFlags,
+        int dwFlags,
         IntPtr lpReserved);
 
-    private const Int32 InternetCookieHttponly = 0x2000;
-
     /// <summary>
-    /// Gets the URI cookie container.
+    ///     Gets the URI cookie container.
     /// </summary>
     /// <param name="uri">The URI.</param>
     /// <returns></returns>
@@ -25,8 +25,8 @@ static internal class GetCookies
     {
         CookieContainer cookies = null;
         // Determine the size of the cookie
-        int datasize = 8192 * 16;
-        StringBuilder cookieData = new StringBuilder(datasize);
+        var datasize = 8192*16;
+        var cookieData = new StringBuilder(datasize);
         if (!InternetGetCookieEx(uri.ToString(), null, cookieData, ref datasize, InternetCookieHttponly, IntPtr.Zero))
         {
             if (datasize < 0)

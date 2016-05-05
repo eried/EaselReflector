@@ -96,7 +96,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app.ico" />
     <Content Include="sync.ico" />
   </ItemGroup>
   <ItemGroup>
