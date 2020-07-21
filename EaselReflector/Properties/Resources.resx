@@ -118,10 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="UrlProjects" xml:space="preserve">
-    <value>http://easel.inventables.com/projects?page={0}</value>
+    <value>https://easel.inventables.com/projects?page={0}</value>
   </data>
   <data name="UrlHome" xml:space="preserve">
-    <value>http://easel.inventables.com</value>
+    <value>https://easel.inventables.com</value>
   </data>
   <data name="RegexProjects" xml:space="preserve">
     <value>&lt;a class=\"project-name\" rel=\"noreferrer\" target=\"_blank\" href=\"(?&lt;url&gt;/projects/.+?)\"&gt;.*?&lt;span&gt;(?&lt;name&gt;.+?)&lt;/span&gt;.*?&lt;/a&gt;</value>

@@ -79,7 +79,7 @@ namespace EaselReflector.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://easel.inventables.com.
+        ///   Looks up a localized string similar to https://easel.inventables.com.
         /// </summary>
         internal static string UrlHome {
             get {
@@ -88,7 +88,7 @@ namespace EaselReflector.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://easel.inventables.com/projects?page={0}.
+        ///   Looks up a localized string similar to https://easel.inventables.com/projects?page={0}.
         /// </summary>
         internal static string UrlProjects {
             get {
