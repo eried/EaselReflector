@@ -3,7 +3,7 @@ After playing a bit [changing some Easel stuff](https://discuss.inventables.com/
 ![Alt text](http://discuss-assets.s3.amazonaws.com/original/3X/c/f/cf75c4268548b612a62a8eefc05d8b269294cb6b.png)
 
 ## What is the concept behind this? 
-The idea is really simple, this little app downloads links for the projects and allows you to keep them updated with one click
+The idea is really simple, this little app downloads links for the projects and allows you to keep them updated with one click. You can move the links to folders, and rename them locally, the tool will only sync the new ones.
 
 ![Alt text](https://cldup.com/vt1w8ZuPMr.gif)
 
