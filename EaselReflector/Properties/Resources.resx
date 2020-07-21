@@ -124,7 +124,7 @@
     <value>http://easel.inventables.com</value>
   </data>
   <data name="RegexProjects" xml:space="preserve">
-    <value>&lt;a class="project-name" rel="noreferrer" target="_blank" href="(?&lt;url&gt;/projects/.+?)"&gt;(?&lt;name&gt;.+?)&lt;/a&gt;</value>
+    <value>&lt;a class=\"project-name\" rel=\"noreferrer\" target=\"_blank\" href=\"(?&lt;url&gt;/projects/.+?)\"&gt;.*?&lt;span&gt;(?&lt;name&gt;.+?)&lt;/span&gt;.*?&lt;/a&gt;</value>
   </data>
   <data name="LinkExtension" xml:space="preserve">
     <value>.lnk</value>

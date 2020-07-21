@@ -19,7 +19,7 @@ namespace EaselReflector.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -70,7 +70,7 @@ namespace EaselReflector.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;a class=&quot;project-name&quot; rel=&quot;noreferrer&quot; target=&quot;_blank&quot; href=&quot;(?&lt;url&gt;/projects/.+?)&quot;&gt;(?&lt;name&gt;.+?)&lt;/a&gt;.
+        ///   Looks up a localized string similar to &lt;a class=\&quot;project-name\&quot; rel=\&quot;noreferrer\&quot; target=\&quot;_blank\&quot; href=\&quot;(?&lt;url&gt;/projects/.+?)\&quot;&gt;.*?&lt;span&gt;(?&lt;name&gt;.+?)&lt;/span&gt;.*?&lt;/a&gt;.
         /// </summary>
         internal static string RegexProjects {
             get {
