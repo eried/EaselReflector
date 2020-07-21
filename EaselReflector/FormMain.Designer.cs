@@ -132,7 +132,7 @@
             this.labelVersion.Name = "labelVersion";
             this.labelVersion.Size = new System.Drawing.Size(75, 13);
             this.labelVersion.TabIndex = 3;
-            this.labelVersion.Text = "0.1.0.0";
+            this.labelVersion.Text = "version";
             this.labelVersion.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             // 
             // FormMain

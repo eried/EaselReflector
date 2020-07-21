@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using EaselReflector.Properties;
@@ -21,6 +22,8 @@ namespace EaselReflector
         public FormMain()
         {
             InitializeComponent();
+
+            labelVersion.Text = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
             if (Directory.Exists(Settings.Default.LastFolder))
                 _folder.FileName = Settings.Default.LastFolder;
