@@ -11,8 +11,3 @@ The idea is really simple, this little app downloads links for the projects and 
 Again, really simple, select a folder and click Sync.
 
 ![Alt text](https://cldup.com/c_7BwUJE2g.gif)
-
-## Download
-_EaselReflector_v0.1.0.0.zip (2016-05-05)_
-
-https://cldup.com/L1pp7Jqw_J.zip
